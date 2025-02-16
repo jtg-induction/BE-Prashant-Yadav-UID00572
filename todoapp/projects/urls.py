@@ -1,9 +1,9 @@
-from django.urls import include, path
+from django.urls import path
 
 from projects.views import ProjectMemberApiViewSet
 
 app_name = 'projects'
 
 urlpatterns=[
-    path('<int:id>/', ProjectMemberApiViewSet.as_view()),
+    path('<int:pk>/<str:action>/', ProjectMemberApiViewSet.as_view({'put' : 'update', 'patch' : 'update'}), name='projectmember'),
 ]

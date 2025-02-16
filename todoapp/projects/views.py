@@ -1,15 +1,12 @@
-from rest_framework import status
 from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from projects import (
     models as project_models,
     serializers as project_serializers
 )
 
-
-class ProjectMemberApiViewSet(APIView):
+class ProjectMemberApiViewSet(ModelViewSet):
     """
        constraints
         - a user can be a member of max 2 projects only
@@ -47,15 +44,13 @@ class ProjectMemberApiViewSet(APIView):
          there will be many other cases think of that and share on forum
     """
     permission_classes = [AllowAny]
+    serializer_class = project_serializers.ProjectMemberSerializer
 
-    def patch(self, request, *args, **kwargs):
-        project_id = kwargs.get('id')
-        serializer = project_serializers.ProjectMemberSerializer(
-            data=request.data, context={
-                'project_id': project_id
-            }
-        )
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_context(self):
+        context =  super().get_serializer_context()
+        context['action'] = self.kwargs.get('action')
+        return context
 
-        return Response(serializer.save(), status=status.HTTP_200_OK)
+    def get_queryset(self):
+        project_id = self.kwargs.get('pk')
+        return project_models.Project.objects.filter(id=project_id)
