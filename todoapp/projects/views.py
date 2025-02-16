@@ -1,4 +1,12 @@
-class ProjectMemberApiViewSet():
+from rest_framework.permissions import AllowAny
+from rest_framework.viewsets import ModelViewSet
+
+from projects import (
+    models as project_models,
+    serializers as project_serializers
+)
+
+class ProjectMemberApiViewSet(ModelViewSet):
     """
        constraints
         - a user can be a member of max 2 projects only
@@ -35,3 +43,14 @@ class ProjectMemberApiViewSet():
 
          there will be many other cases think of that and share on forum
     """
+    permission_classes = [AllowAny]
+    serializer_class = project_serializers.ProjectMemberSerializer
+
+    def get_serializer_context(self):
+        context =  super().get_serializer_context()
+        context['action'] = self.kwargs.get('action')
+        return context
+
+    def get_queryset(self):
+        project_id = self.kwargs.get('pk')
+        return project_models.Project.objects.filter(id=project_id)
