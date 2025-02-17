@@ -2,8 +2,7 @@ from django.conf import settings
 from django.db import connection
 from django.test import TestCase
 
-from .. import utils as todos_utils
-
+from todos import utils as todos_utils
 
 class TestSetupMixin(object):
 

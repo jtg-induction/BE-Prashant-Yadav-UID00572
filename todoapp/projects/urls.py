@@ -4,6 +4,7 @@ from projects.views import ProjectMemberApiViewSet
 
 app_name = 'projects'
 
-urlpatterns=[
-    path('<int:pk>/<str:action>/', ProjectMemberApiViewSet.as_view({'put' : 'update', 'patch' : 'update'}), name='projectmember'),
+urlpatterns = [
+    path('<int:pk>/<str:action>/', ProjectMemberApiViewSet.as_view(
+        {'put': 'update', 'patch': 'update'}), name='projectmemberupdate'),
 ]

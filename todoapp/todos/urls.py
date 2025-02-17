@@ -9,6 +9,6 @@ from rest_framework import routers
 router = routers.SimpleRouter()
 
 
-router.register(r'todos', TodoAPIViewSet, 'todos')
+router.register('', TodoAPIViewSet, 'todos')
 
 urlpatterns = router.urls

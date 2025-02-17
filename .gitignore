@@ -1,10 +1,8 @@
-# Byte-compiled / cached files
 __pycache__/
 *.py[cod]
 *.so
 *.pyo
 
-# Virtual Environment
 venv/
 env/
 *.env
@@ -12,47 +10,7 @@ env/
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Django & Python-related logs and database files
-*.log
-db.sqlite3
-db.sqlite3-journal
-
-# Django Migrations (optional, but usually tracked)
-*/migrations/__pycache__/
-*/migrations/*.pyc
-*/migrations/*.pyo
-
-# Secret and environment variables
-.env
-.envrc
-*.pem
-config/settings/local.py
-config/settings/dev.py
-
-# Static and media files (optional, if generated dynamically)
-staticfiles/
-media/
-
-# Ignore compiled code & IDE/editor files
 .idea/
 .vscode/
-*.swp
-*.swo
-*.DS_Store
-Thumbs.db
 
-# Ignore Python dependency management tools
-poetry.lock
-Pipfile
-Pipfile.lock
-node_modules/
-
-# Ignore build artifacts
-build/
-dist/
-*.egg-info/
-MANIFEST
-
-# Docker & Deployment
-docker-compose.override.yml
-__docker_compose_cache/
+*/todoapp/settings.py

@@ -82,10 +82,12 @@ class ProjectMemberSerializer(serializers.ModelSerializer):
                     logs[user.id] = 'User is already a member of this project.'
                 else:
                     logs[user.id] = 'Successfully added to the project.'
-                    new_members.append(project_models.ProjectMember(
-                        project=instance, member=user))
+                    new_members.append(
+                        project_models.ProjectMember(project=instance, member=user)
+                    )
                     remaining_slots -= 1
             project_models.ProjectMember.objects.bulk_create(new_members)
+            
         elif action == 'remove':
             for user_id in valid_users:
                 if user_id not in existing_members:
