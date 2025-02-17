@@ -57,7 +57,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = user_models.CustomUser.objects.create_user(**validated_data)
-        Token.objects.create(user=user)
         return user
 
     def get_token(self, instance):
