@@ -42,6 +42,6 @@ class UserLoginAPIView(CreateAPIView):
         if user is None:
             return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
-        token, created = Token.objects.get_or_create(user=user)
+        token, _ = Token.objects.get_or_create(user=user)
 
         return Response({'auth_token': token.key}, status=status.HTTP_200_OK)
