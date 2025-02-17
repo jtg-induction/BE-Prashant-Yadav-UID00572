@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 
 from rest_framework import status
 from rest_framework.authtoken.models import Token
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
@@ -40,8 +41,7 @@ class UserLoginAPIView(CreateAPIView):
         password = serializer.validated_data['password']
         user = authenticate(username=email, password=password)
         if user is None:
-            return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
+            raise AuthenticationFailed('Invalid credentials')
         token, _ = Token.objects.get_or_create(user=user)
 
         return Response({'auth_token': token.key}, status=status.HTTP_200_OK)
